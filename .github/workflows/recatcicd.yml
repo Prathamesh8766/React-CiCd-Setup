@@ -5,7 +5,7 @@ on:
       - main
       - master
   workflow_dispatch:
-    
+
 jobs:   
   build-and-test:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       - name: "Run Test"  
         run: npm test
 
-      - name: "Run Buoild"
+      - name: "Run Build"
         run: npm run build
 
       - name: "Upload Production-ready Build Files"  
@@ -41,10 +41,10 @@ jobs:
         with:
           name: build
           path: dist
-  on_workflow_dipatch:
-          if : github.event_name== "workflow_dispatch"
-          runs-on: ubuntu-latest
 
-          steps:
-            - name: "workflow_dispatch"
-              run:  echo "workflow_dispatch"
+  manual-trigger-job:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Manual Workflow Trigger"
+        run: echo "This job runs only when manually triggered!"
