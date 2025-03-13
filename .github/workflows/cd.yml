@@ -4,7 +4,7 @@ on:
     workflows: ["React-CICD_Setup"]
     types:
       - completed
-
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -33,4 +33,4 @@ jobs:
         run: ls -R
 
       - name: "Deploy to Vercel"
-        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm --cicd_project
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm
