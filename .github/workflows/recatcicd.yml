@@ -35,8 +35,8 @@ jobs:
       - name: "Run Buoild"
         run: npm run build
 
-      - name: "Uplode Production -reay build Files"  
-        uses: actions/uplode-artifact@v4
+      - name: "Upload Production-ready Build Files"  
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: dist
