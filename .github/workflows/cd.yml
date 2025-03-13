@@ -1,0 +1,35 @@
+name: "Deployment"
+on:
+  workflow_run:
+    workflows: ["React-CICD_Setup"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v2
+
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'
+
+      - name: "Setup Vercel CLI"
+        run: npm install -g vercel
+
+      - name: "Download Build Files"
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          
+
+      - name: "Deploy to Vercel"
+        run: vercel --prod --token=${{secret.VERCEL_TOKEN}} --confirm --cicd_project
+      
