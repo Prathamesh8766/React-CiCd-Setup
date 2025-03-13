@@ -26,3 +26,5 @@ jobs:
       - name: "Install Dependencies"
         run: npm install  
 
+      - name: "Run Buoild"
+        run: npm run build
